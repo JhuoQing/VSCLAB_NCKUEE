@@ -63,6 +63,18 @@ python tools/compress_members.py --overwrite
 可用 `--quality 80` 調整品質（1–100）。建議約 80–85，並檢查臉部細節；50–150 KB 是參考目標，非強制限制。
 
 
+## 三之二、成員照片小工具(圖形介面,不用打指令)
+
+`tools/member-photo-tool.html` 是一個單一網頁檔,用電腦版 **Chrome 或 Edge** 雙擊開啟即可,不需安裝 Python。
+
+1. 按「選擇專案資料夾」,選本機專案資料夾(有 `index.html`、`data`、`assets` 的那一層)。瀏覽器會問是否允許編輯,請按允許。下次再按時,選取視窗會停在上次的位置。
+2. 把多張照片拖進去。原檔名是中文姓名(例如 `張志晧.jpg`)會自動配對成員,否則從下拉選單選人。
+3. 英文檔名會自動建議(張志晧 → `zhang-zhihao`),可直接修改;重複、已存在、同一人選多張都會提示。
+4. 按「存進專案資料夾」:壓縮成 WebP(最大 600×800、不放大、不裁切、品質 82、校正方向、移除定位資料)存進 `assets/img/members/`,並可勾選同時更新 `data/members.js` 的 `photo` 欄位(只加或改該成員的 `photo`,其餘不動,寫入前會驗證檔案仍可讀)。
+5. 完成畫面會列出要上傳到 GitHub 的檔案,並附上傳頁面連結。
+
+照片只在瀏覽器內處理,不會上傳到任何地方;原圖不會被修改。限制:HEIC 請先轉成 JPG;不含裁切。命令列版仍可用:`tools/compress_members.py`。
+
 ## 四、相簿(最省事的方式)
 
 1. 把原始照片放進 `photos_raw/相簿代號/`(代號用英文數字,例如 `cacs-2026`)。這個資料夾不會被上傳。
@@ -103,7 +115,8 @@ assets/js/hero.js           首頁伺服響應曲線動畫
 assets/img/                 Logo、成員、研究、相簿圖片
 data/                       所有內容資料
 tools/make_gallery.py       相簿壓縮與產生腳本
-tools/compress_members.py   成員照片壓縮腳本
+tools/compress_members.py   成員照片壓縮腳本(命令列)
+tools/member-photo-tool.html 成員照片小工具(圖形介面)
 ```
 
 ## 七、資料來源與待補
