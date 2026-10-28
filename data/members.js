@@ -13,8 +13,8 @@ window.MEMBERS = {
     master: [
       { name: "施勇翰" }, { name: "徐柏元" }, { name: "吳洲坣" }, { name: "范凱程" },
       { name: "高郁翔" }, { name: "廖昱翔" }, { name: "黃煜傑" }, { name: "李冠諭" },
-      { name: "卓侑慶" }, { name: "陳昀浚" }, { name: "陳冠穎" }, { name: "張志晧", photo: "assets/img/members/zhang-zhihao.webp"  },
-      { name: "楊敦宇" }, { name: "蒲耀弘" }
+      { name: "卓侑慶" }, { name: "陳昀浚", photo: "assets/img/members/chen-yunjun.webp" }, { name: "陳冠穎", photo: "assets/img/members/chen-guanying.webp" }, { name: "張志晧" },
+      { name: "楊敦宇", photo: "assets/img/members/yang-dunyu.webp" }, { name: "蒲耀弘" }
     ]
   },
 
