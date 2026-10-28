@@ -11,10 +11,10 @@ window.MEMBERS = {
       { name: "黃嘉浚", en: "Chia-Chun Huang" }, { name: "田益明", en: "Yi-Ming Tien" }, { name: "姚昱成" }
     ],
     master: [
-      { name: "施勇翰" }, { name: "徐柏元" }, { name: "吳洲坣" }, { name: "范凱程" },
-      { name: "高郁翔" }, { name: "廖昱翔" }, { name: "黃煜傑" }, { name: "李冠諭" },
-      { name: "卓侑慶" }, { name: "陳昀浚", photo: "assets/img/members/chen-yunjun.webp" }, { name: "陳冠穎", photo: "assets/img/members/chen-guanying.webp" }, { name: "張志晧" , photo: "assets/img/members/zhang-zhihao.webp" },
-      { name: "楊敦宇", photo: "assets/img/members/yang-dunyu.webp" }, { name: "蒲耀弘" }
+      { name: "施勇翰", photo: "assets/img/members/shi-yonghan.webp" }, { name: "徐柏元", photo: "assets/img/members/xu-baiyuan.webp" }, { name: "吳洲坣", photo: "assets/img/members/wu-zhoutang.webp" }, { name: "范凱程", photo: "assets/img/members/fan-kaicheng.webp" },
+      { name: "高郁翔" }, { name: "廖昱翔" }, { name: "黃煜傑", photo: "assets/img/members/huang-yujie.webp" }, { name: "李冠諭", photo: "assets/img/members/li-guanyu.webp" },
+      { name: "卓侑慶", photo: "assets/img/members/zhuo-youqing.webp" }, { name: "陳昀浚", photo: "assets/img/members/chen-yunjun.webp" }, { name: "陳冠穎", photo: "assets/img/members/chen-guanying.webp" }, { name: "張志晧", photo: "assets/img/members/zhang-zhihao.webp" },
+      { name: "楊敦宇", photo: "assets/img/members/yang-dunyu.webp" }, { name: "蒲耀弘", photo: "assets/img/members/pu-yaohong.webp" }
     ]
   },
 
