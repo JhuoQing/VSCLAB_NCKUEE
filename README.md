@@ -57,6 +57,14 @@ GitHub 倉庫建議總容量控制在 1 GB 內;經腳本壓縮後每張約 150�
 2. 介面文字的英文已預先放在 `data/i18n.js`。
 3. 資料內容(研究、新聞等)想要英文時,在該筆資料加 `title_en`、`desc_en` 這類欄位;沒有英文欄位的會自動顯示中文。
 
+## 五之一、深色 / 淺色主題
+
+- 導覽列右側有太陽 / 月亮按鈕,點一下切換,偏好會記在瀏覽器(`localStorage`),換頁與下次再來都會保留;多個分頁之間也會同步。
+- 預設是**深色**(沒選過時)。想改成「依訪客系統設定自動決定」,把各個 `.html` `<head>` 裡那段早期腳本的 `localStorage.getItem("theme")||"dark"` 改成
+  `localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark")`(8 個頁面都要改)。
+- 所有顏色集中在 `assets/css/style.css` 最上面的兩組變數:`:root`(深色)與 `:root[data-theme="light"]`(淺色)。要調淺色主色,改後者的 `--accent` 與 `--accent-rgb`(請保持在白底上對比度 ≥ 4.5:1)。
+- 相簿燈箱與蓋在照片上的文字刻意固定為深色,不隨主題變化。
+
 ## 六、檔案結構
 
 ```

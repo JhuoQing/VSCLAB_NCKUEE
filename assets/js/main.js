@@ -86,7 +86,7 @@
       <section class="block"><div class="wrap">
         ${secHead("01", t("about.intro"), "Introduction")}
         <div class="grid c2">
-          <div class="rv" style="font-size:17px;color:#c5d1d9">
+          <div class="rv" style="font-size:17px;color:var(--text-2)">
             <p>${esc(SITE.name)}隸屬於${esc(SITE.org)},由${esc(P.name)}教授帶領。研究聚焦於「看得準」與「動得穩」兩件事:以視覺感知取得目標資訊,再以高性能的運動控制與馬達驅動讓機器精準執行。</p>
             <p>研究主軸包含${P.fields.map(esc).join("、")},並延伸至機械手臂動力學、阻抗控制、人機協作與穿戴式輔具等應用。</p>
           </div>
@@ -214,7 +214,7 @@
             <div class="sub-title">${esc(t("members.courses"))}</div>
             <div class="chips" style="margin-top:0">${P.courses.map((x) => `<span class="chip">${esc(x)}</span>`).join("")}</div>
             <div class="sub-title">${esc(t("members.honors"))}</div>
-            <ul style="margin:0;padding-left:20px;color:#c5d1d9">${P.honors.map((h) => `<li>${esc(h)}</li>`).join("")}</ul>
+            <ul style="margin:0;padding-left:20px;color:var(--text-2)">${P.honors.map((h) => `<li>${esc(h)}</li>`).join("")}</ul>
           </div>
         </div>
       </div></section>

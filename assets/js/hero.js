@@ -6,7 +6,16 @@
   const ctx = cv.getContext("2d");
   const readout = document.getElementById("heroReadout");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const ACC = "25,211,230", WARN = "255,176,32";
+  // 顏色從 CSS 變數讀取,切換主題時重新讀取(themechange 事件由 layout.js 發出)
+  let ACC = "25,211,230", WARN = "255,176,32", LIGHT = false;
+  function readColors() {
+    const cs = getComputedStyle(document.documentElement);
+    ACC = cs.getPropertyValue("--accent-rgb").trim().replace(/\s+/g, "") || ACC;
+    WARN = cs.getPropertyValue("--warn-rgb").trim().replace(/\s+/g, "") || WARN;
+    LIGHT = document.documentElement.dataset.theme === "light";
+  }
+  readColors();
+  addEventListener("themechange", () => { readColors(); if (reduce) frame(performance.now()); });
   let W, H, dpr;
 
   function resize() {
@@ -36,7 +45,7 @@
   });
 
   function drawGrid() {
-    ctx.strokeStyle = `rgba(${ACC},.07)`; ctx.lineWidth = 1;
+    ctx.strokeStyle = `rgba(${ACC},${LIGHT ? .13 : .07})`; ctx.lineWidth = 1;
     const s = 48;
     ctx.beginPath();
     for (let x = 0; x < W; x += s) { ctx.moveTo(x, 0); ctx.lineTo(x, H); }
@@ -45,8 +54,10 @@
   }
 
   function drawCurve(now) {
-    const el = (now - t0) % (DRAW + HOLD);
-    pi = Math.floor((now - t0) / (DRAW + HOLD)) % presets.length;
+    // rAF 的時間戳可能比 t0 略早,所以夾到 ≥ 0,避免第一格取到負的索引而中斷動畫
+    const dt = Math.max(0, now - t0);
+    const el = dt % (DRAW + HOLD);
+    pi = Math.floor(dt / (DRAW + HOLD)) % presets.length;
     const p = presets[pi];
     const prog = Math.min(el / DRAW, 1);
     const x0 = W * .42, x1 = W * .95, yB = H * .78, yT = H * .26;
@@ -60,7 +71,7 @@
     ctx.beginPath(); ctx.moveTo(x0, Y(1)); ctx.lineTo(x1, Y(1)); ctx.stroke(); ctx.setLineDash([]);
     // ±2% 帶
     ctx.fillStyle = `rgba(${ACC},.06)`; ctx.fillRect(x0, Y(1.02), x1 - x0, Y(.98) - Y(1.02));
-    ctx.fillStyle = `rgba(${ACC},.7)`; ctx.font = "11px 'JetBrains Mono', monospace";
+    ctx.fillStyle = `rgba(${ACC},${LIGHT ? 1 : .7})`; ctx.font = "11px 'JetBrains Mono', monospace";
     ctx.fillText("SETPOINT r(t)", x1 - 100, Y(1) - 8);
 
     // 響應曲線
@@ -70,7 +81,7 @@
       const t = (i / N) * TMAX, x = X(t), y = Y(resp(t, p.z, p.wn));
       i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
     }
-    ctx.shadowColor = `rgba(${ACC},.9)`; ctx.shadowBlur = 14;
+    ctx.shadowColor = `rgba(${ACC},.9)`; ctx.shadowBlur = LIGHT ? 5 : 14;
     ctx.strokeStyle = `rgb(${ACC})`; ctx.lineWidth = 2.5; ctx.stroke(); ctx.shadowBlur = 0;
 
     // 游標點

@@ -6,7 +6,7 @@ window.I18N = {
   zh: {
     "nav.home": "首頁", "nav.about": "關於", "nav.research": "研究", "nav.members": "成員",
     "nav.pubs": "成果", "nav.gallery": "相簿", "nav.join": "加入我們",
-    "boot": "SYSTEM INITIALIZING",
+    "boot": "SYSTEM INITIALIZING", "theme.light": "切換為淺色模式", "theme.dark": "切換為深色模式",
     "home.research": "研究方向", "home.news": "最新消息", "home.gallery": "實驗室影像",
     "home.more": "查看全部 →", "home.cta": "了解研究", "home.cta2": "加入實驗室",
     "about.title": "關於實驗室", "about.intro": "實驗室簡介",
@@ -25,7 +25,7 @@ window.I18N = {
   en: {
     "nav.home": "Home", "nav.about": "About", "nav.research": "Research", "nav.members": "Members",
     "nav.pubs": "Publications", "nav.gallery": "Gallery", "nav.join": "Join Us",
-    "boot": "SYSTEM INITIALIZING",
+    "boot": "SYSTEM INITIALIZING", "theme.light": "Switch to light mode", "theme.dark": "Switch to dark mode",
     "home.research": "Research Areas", "home.news": "News", "home.gallery": "Lab Gallery",
     "home.more": "View all →", "home.cta": "Our Research", "home.cta2": "Join the Lab",
     "about.title": "About the Lab", "about.intro": "Introduction",

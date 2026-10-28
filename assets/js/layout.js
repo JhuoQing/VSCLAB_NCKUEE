@@ -62,9 +62,39 @@
         ${NAV.map(([id, href, key]) => `<a href="${href}" class="${id === page ? "active" : ""}">${esc(t(key))}</a>`).join("")}
         ${langs.length > 1 ? `<button class="lang-btn" id="langBtn" type="button">${lang === "zh" ? "EN" : "中"}</button>` : ""}
       </nav>
+      <button class="theme-btn" id="themeBtn" type="button">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
       <button class="burger" id="burger" type="button" aria-label="選單" aria-expanded="false">☰</button>
     </div>`;
   body.prepend(head);
+
+  /* ---------- 主題(深色 / 淺色) ----------
+     偏好存在 localStorage("theme");各頁 <head> 內有一小段早期腳本會先套用,避免換頁時閃一下。 */
+  const root = document.documentElement;
+  const themeBtn = head.querySelector("#themeBtn");
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  const curTheme = () => (root.dataset.theme === "light" ? "light" : "dark");
+  function setTheme(th, opts) {
+    opts = opts || {};
+    if (opts.animate) {
+      root.classList.add("theme-anim");
+      clearTimeout(setTheme._t);
+      setTheme._t = setTimeout(() => root.classList.remove("theme-anim"), 400);
+    }
+    root.dataset.theme = th;
+    if (metaTheme) metaTheme.setAttribute("content", th === "light" ? "#f3f6f8" : "#07090b");
+    const label = th === "light" ? t("theme.dark") : t("theme.light"); // 按鈕說明 = 點了會變成什麼
+    themeBtn.setAttribute("aria-label", label);
+    themeBtn.title = label;
+    if (opts.save) { try { localStorage.setItem("theme", th); } catch (e) {} }
+    window.dispatchEvent(new Event("themechange")); // 首頁 Canvas 動畫會聽這個事件換色
+  }
+  setTheme(curTheme());
+  themeBtn.addEventListener("click", () => setTheme(curTheme() === "light" ? "dark" : "light", { animate: true, save: true }));
+  // 其他分頁切換主題時同步
+  addEventListener("storage", (e) => { if (e.key === "theme" && (e.newValue === "light" || e.newValue === "dark")) setTheme(e.newValue, { animate: true }); });
   const nav = head.querySelector("#nav"), burger = head.querySelector("#burger");
   burger.addEventListener("click", () => {
     const o = nav.classList.toggle("open");
