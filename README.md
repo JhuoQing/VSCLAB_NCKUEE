@@ -37,6 +37,32 @@
 - **研究方向圖片**:`assets/img/research/visual-servo.jpg`、`motion-control.jpg`、`motor-drive.jpg`、`industrial-robot.jpg`(16:10 橫式)。
   想放 Demo 影片:把影片上傳 YouTube,在 `data/research.js` 該研究加上 `youtube: "影片ID"`(網址 `v=` 後面那串),圖片位置會換成影片。**請不要把影片檔放進倉庫。**
 
+## 三之一、成員照片先壓縮再上傳
+
+1. 在專案根目錄建立 `members_raw/`，放入原始照片（不要放進相簿用的 `photos_raw/`）。原圖已由 `.gitignore` 排除，請另外備份。
+2. 檔名使用英數字、連字號或底線，例如 `ming-yang.jpg`；同一批不可有同名不同副檔名或僅大小寫不同的照片。
+3. 在本機專案根目錄執行（GitHub 網頁上傳不會自動壓縮）：
+   ```bash
+   python -m pip install pillow
+   python tools/compress_members.py
+   ```
+4. 輸出為 `assets/img/members/ming-yang.webp`。腳本校正 EXIF 方向、依比例縮至最多 600 × 800 px、不裁切、不放大小圖、保留透明度，移除 EXIF/GPS 資訊。預設 WebP 品質 82；檔案大小依照片內容而異。
+5. 在 `data/members.js` 對應成員加入或修改：
+   ```js
+   photo: "assets/img/members/ming-yang.webp"
+   ```
+   教授照片則修改 `data/site.js` 的 `professor.photo`。
+6. 預覽成員卡片與彈窗後，提交壓縮圖片及資料檔。卡片與彈窗裁切比例不同，建議原照人物置中並留白。
+
+支援 JPG/JPEG、PNG、靜態 WebP、BMP；HEIC 請先匯出為 JPG。腳本只處理 `members_raw/` 直接放置的檔案，不讀取子資料夾，不修改成員或相簿資料。損壞圖片會回報失敗，其他照片繼續處理。
+
+預設遇到既有輸出會停止，以免意外覆蓋。確定要更新同名照片時：
+```bash
+python tools/compress_members.py --overwrite
+```
+可用 `--quality 80` 調整品質（1–100）。建議約 80–85，並檢查臉部細節；50–150 KB 是參考目標，非強制限制。
+
+
 ## 四、相簿(最省事的方式)
 
 1. 把原始照片放進 `photos_raw/相簿代號/`(代號用英文數字,例如 `cacs-2026`)。這個資料夾不會被上傳。
@@ -77,6 +103,7 @@ assets/js/hero.js           首頁伺服響應曲線動畫
 assets/img/                 Logo、成員、研究、相簿圖片
 data/                       所有內容資料
 tools/make_gallery.py       相簿壓縮與產生腳本
+tools/compress_members.py   成員照片壓縮腳本
 ```
 
 ## 七、資料來源與待補
