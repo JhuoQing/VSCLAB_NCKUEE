@@ -2,7 +2,7 @@
 window.GALLERY = [
   {
     "id": "cacs-2026",
-    "title": "cacs-2026",
+    "title": "蒲哥的摯愛",
     "title_en": "",
     "date": "",
     "cover": "assets/img/gallery/cacs-2026/01.webp",
